@@ -61,7 +61,8 @@ async def 명령어(ctx):
 4. **민택봇 안녕**  - 민택이가 인사해요!
 5. **민택봇 죽어**  - 민택이 죽어욧
 6. **민택봇 팬티**  - 오늘의 팬티 색깔은? [1% 확률로 보라팬티 등장!]
-7. **민택봇아**  - 민택봇(이)가 고민을 해결해줘요
+7. **민택봇 뭐해**  - 민택봇은 뭘 하고있을까요?
+8. **민택봇아**  - 민택봇(이)가 고민을 해결해줘요
 """
     await ctx.send(도움말)
 
@@ -100,16 +101,28 @@ async def 셀카(ctx):
 @bot.command(name="민택봇아")
 async def 민택봇아(ctx, *, 질문):
     민택답변 = [
-        "ㄴㄴ하지마셈",
-        "ㅋㅋㅋㅋㅋㅋㅇㅋㅇㅋ",
+        "그건 님이 정해야죠",
+        "모르겠음",
+        "다시 생각해보셈",
+        "그건 님이 알죠",
+        "ㄱㄱ",
+        "진짜 모르겠음...",
+        "뭐지?",
+        "?",
+        "때되면 알겠지",
+        "하지마셈",
+        "ㅋㅋㅋㅋㅋㅋㅋㅇㅋㅇㅋ",
         "좋은데요?",
         "개별론데요",
         "에바띠",
-        "몰겠음",
         "응가",
-        "알아서하셈"
+        "알아서하셈",
+        "?",
+        "저도 몰라요",
+        "크아악 뭐라는거냐"
     ]
     await ctx.send(f"🔮 **{질문}**\n👉 {random.choice(민택답변)}")
+
 
 # ✅ on_message로 명령어 확장 처리
 @bot.event
@@ -144,6 +157,34 @@ async def on_message(message):
         await 민택봇아.callback(ctx, 질문=질문)
 
     await bot.process_commands(message)
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("그건 아직 없는데")
+    else:
+        await ctx.send("뭐라고요?")
+
+@bot.command(name="뭐해")
+async def 뭐해(ctx):
+    대답 = [
+        "엉 출근함",
+        "방구",
+        "시발 현종씨한테 볼뽀뽀당했어 나 너무 수치스러워",
+        "현종씨가 허벅지만져서 얼굴에 싸커킥꼽음 ㅅㅂ",
+        "림버스",
+        "명방 ㅋㅋ",
+        "잠깐 누워있음",
+        "브챗중인디",
+        "47시간째 김박스 포장중",
+        "걍있음",
+        "뭐 없음",
+        "이제 잘라고",
+        "엄...",
+        "왜"
+    ]
+    # 랜덤으로 대답을 하나 선택해서 전송
+    await ctx.send(random.choice(대답))
 
 # ✅ 봇 실행
 bot.run(TOKEN)
