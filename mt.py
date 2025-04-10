@@ -123,7 +123,6 @@ async def 민택봇아(ctx, *, 질문):
     ]
     await ctx.send(f"🔮 **{질문}**\n👉 {random.choice(민택답변)}")
 
-
 # ✅ on_message로 명령어 확장 처리
 @bot.event
 async def on_message(message):
@@ -156,7 +155,8 @@ async def on_message(message):
         질문 = content[5:].strip()
         await 민택봇아.callback(ctx, 질문=질문)
 
-    await bot.process_commands(message)
+    # 여기가 중복 호출을 방지하는 부분
+    await bot.process_commands(message)  # 여기에서만 호출
 
 @bot.event
 async def on_command_error(ctx, error):
