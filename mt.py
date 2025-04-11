@@ -215,11 +215,11 @@ async def 자기소개(ctx):
 @bot.command()
 async def 사진(ctx):
     photo_urls = [
-        "https://media.discordapp.net/attachments/...1.png",
-        "https://media.discordapp.net/attachments/...2.png",
-        "https://media.discordapp.net/attachments/...3.png",
-        "https://media.discordapp.net/attachments/...4.png",
-        "https://media.discordapp.net/attachments/...5.png"
+        "https://media.discordapp.net/attachments/1226479109878714369/1360320282723619018/ChatGPT_Image_2025_4_12_02_47_23.png",
+        "https://media.discordapp.net/attachments/1226479109878714369/1360320283335983257/ChatGPT_Image_2025_4_12_03_00_49.png",
+        "https://media.discordapp.net/attachments/1226479109878714369/1360320283814138066/ChatGPT_Image_2025_4_12_02_55_14.png",
+        "https://media.discordapp.net/attachments/1226479109878714369/1360320284359393490/ChatGPT_Image_2025_4_12_02_51_23.png",
+        "https://media.discordapp.net/attachments/1226479109878714369/1360320285173223464/ChatGPT_Image_2025_4_12_02_49_14.png"
     ]
     await ctx.send("에헤헷… 마스터가 찍어주신 피쨩 사진이에요! 🐱💖\n" + random.choice(photo_urls))
 
