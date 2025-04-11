@@ -212,6 +212,19 @@ async def 자기소개(ctx):
         "명령어로 저를 불러주시면 언제든… 살금살금 나올게요… 우우… 부끄러워요… 💕"
     )
 
+photo_links = [
+    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489833801_2113093175874031_8160234727442772106_n.jpg?...",
+    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/490382613_2113094139207268_8708824207201823351_n.jpg?...",
+    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/490542233_2113095449207137_5839930235358460835_n.jpg?...",
+    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489955048_2113098309206851_1680242352620076721_n.jpg?...",
+    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489858391_2113101502539865_8798324232187224189_n.jpg?...",
+]
+
+@bot.command()
+async def 사진(ctx):
+    photo = random.choice(photo_links)
+    await ctx.send(f"히히~ 이건요! 마스터가 찍어준 피쨩 사진이에요!! 📸💕\n{photo}")
+
 bot.run(TOKEN)
 
 # 피쨩봇 맨 아래에 추가하기!
