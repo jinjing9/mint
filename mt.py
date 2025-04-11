@@ -213,3 +213,19 @@ async def 자기소개(ctx):
     )
 
 bot.run(TOKEN)
+
+# 피쨩봇 맨 아래에 추가하기!
+from flask import Flask
+import threading
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "피쨩 숨 쉬는 중이에요… 🐾"
+
+def run():
+    app.run(host='0.0.0.0', port=10000)
+
+# Flask 서버를 백그라운드로 실행
+threading.Thread(target=run).start()
