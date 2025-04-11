@@ -212,18 +212,14 @@ async def 자기소개(ctx):
         "명령어로 저를 불러주시면 언제든… 살금살금 나올게요… 우우… 부끄러워요… 💕"
     )
 
-photo_links = [
-    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489833801_2113093175874031_8160234727442772106_n.jpg?...",
-    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/490382613_2113094139207268_8708824207201823351_n.jpg?...",
-    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/490542233_2113095449207137_5839930235358460835_n.jpg?...",
-    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489955048_2113098309206851_1680242352620076721_n.jpg?...",
-    "https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/489858391_2113101502539865_8798324232187224189_n.jpg?...",
-]
-
 @bot.command()
 async def 사진(ctx):
-    photo = random.choice(photo_links)
-    await ctx.send(f"히히~ 이건요! 마스터가 찍어준 피쨩 사진이에요!! 📸💕\n{photo}")
+    await ctx.send("이거요… 마스터가 찍어준 피쨩이에요…!히히 💕🐾")
+    await ctx.send("https://media.discordapp.net/attachments/1226479109878714369/1360320282723619018/ChatGPT_Image_2025_4_12_02_47_23.png")
+    await ctx.send("https://media.discordapp.net/attachments/1226479109878714369/1360320283335983257/ChatGPT_Image_2025_4_12_03_00_49.png")
+    await ctx.send("https://media.discordapp.net/attachments/1226479109878714369/1360320283814138066/ChatGPT_Image_2025_4_12_02_55_14.png")
+    await ctx.send("https://media.discordapp.net/attachments/1226479109878714369/1360320284359393490/ChatGPT_Image_2025_4_12_02_51_23.png")
+    await ctx.send("https://media.discordapp.net/attachments/1226479109878714369/1360320285173223464/ChatGPT_Image_2025_4_12_02_49_14.png")
 
 bot.run(TOKEN)
 
