@@ -13,16 +13,11 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="피쨩! ", intents=intents)
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send("피쨩은 아직 그런 건 몰라요… 🙈")
-
 # 금지어 리스트와 반응 추가
 bad_words = [
     "닥쳐", "시발", "시발련아", "죽어", "꺼져",
     "개새끼", "병신", "멍청이", "미친", "지랄",
-    "엿먹어", "꺼지세요", "좆까" "홍민택"
+    "엿먹어", "꺼지세요", "좆까", "홍민택",
 ]
 bad_word_responses = [
     "우우… 너무해요… 피쨩 속상해요… 🥺",
@@ -192,18 +187,28 @@ async def on_message(message):
         return
 
     ctx = await bot.get_context(message)
-    if ctx.command is None and message.content.startswith("피쨩! ") and message.content.endswith("?"):
-        await message.channel.send(random.choice(question_responses))
-        return
 
+    # 1. 금지어 감지 (질문보다 먼저 처리)
     for word in bad_words:
         if word in message.content.lower():
             if random.random() < 0.05:
                 await message.channel.send("죽어주세요.")
             else:
                 await message.channel.send(random.choice(bad_word_responses))
-            return
+            return  # 명령어 실행 방지
 
+    # 2. 질문 감지 (명령어가 아닐 때만 실행)
+    if ctx.command is None and message.content.startswith("피쨩! ") and message.content.endswith("?"):
+        await message.channel.send(random.choice(question_responses))
+        return  # 명령어 실행 방지
+
+    # 3. 정상 명령어일 경우에만 처리
     await bot.process_commands(message)
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("피쨩은 아직 그런 건 몰라요… 🙈")
+
 
 bot.run(TOKEN)
