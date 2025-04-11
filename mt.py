@@ -13,14 +13,14 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="피쨩! ", intents=intents)
 
-# 금지어 리스트와 반응 추가
+# 반응 목록들
 bad_words = [
     "닥쳐", "시발", "시발련아", "죽어", "꺼져",
     "개새끼", "병신", "멍청이", "미친", "지랄",
-    "엿먹어", "꺼지세요", "좆까", "홍민택",
+    "엿먹어", "꺼지세요", "좆까", "홍민택", "십련아", "병신아", "뒤질래?", 
 ]
 bad_word_responses = [
-    "우우… 너무해요… 피쨩 속상해요… 🥺",
+    "우우… 너무해요… 그런말… 피쨩 속상해요… 🥺",
     "그런 말 하면… 피쨩 울지도 몰라요… 😿",
     "에잇! 나쁜 말은 안 돼요! 🙈",
     "히잉… 피쨩한테 왜 그래요… 💦",
@@ -32,9 +32,9 @@ bad_word_responses = [
     "피쨩 도망가버릴 거예요… 💨"
 ]
 
-# 마스터 전용 반응 리스트
+# 대사 리스트들 (묶음 정리)
 master_hello = [
-    "마스터 안녕하세요… 오늘도 예쁘세요… 💕",
+    "마스터 안녕하세요… 찾아주셔서 감사해요… 💕",
     "우아… 기다리고 있었어요 마스터 ✨",
     "마스터… 오늘 기분은 어때요? 피쨩은 좋아요… 🍓",
     "꼬옥 안아드릴게요 마스터… 💖",
@@ -45,7 +45,6 @@ master_hello = [
     "피쨩 여기 있었어요 마스터! 기다렸어요… 🫧",
     "살금살금… 마스터한테 인사하러 나왔어요! 🐱"
 ]
-
 not_master_hello = [
     "안녕하세요… 마스터 아니시군요? 👀",
     "피쨩이에요… 근데 마스터는 아니시네요! ✋",
@@ -58,7 +57,6 @@ not_master_hello = [
     "피쨩은 마스터 기다리고 있었어요… 아… 아니시군요! 😳",
     "안녕히 계세요… 아, 아니 인사… 인사예요! 🐾"
 ]
-
 master_love = [
     "마스터… 그런 말 해주면… 피쨩 마음이 간질간질해져요… 💞",
     "피쨩도 마스터 정말정말… 정말 많이 아껴요… 🍓",
@@ -71,7 +69,6 @@ master_love = [
     "피쨩은 마스터가 하는 말이면 다 좋아요… ✨",
     "우으… 마스터… 너무 기뻐서 귀가 빨개졌어요… 🐱"
 ]
-
 not_master_love = [
     "에… 그건 마스터한테만 듣고 싶은 말인데요…? 🙈",
     "으응… 그래도 조금은… 고마워요 💬",
@@ -84,7 +81,6 @@ not_master_love = [
     "다정한 건 좋아요… 마스터처럼만은 아니지만… 💫",
     "에헤헷… 감사합니다… 아주 조금만…요… 🩷"
 ]
-
 what_doing_responses = [
     "지금은 마스터 생각 중이에요… 🍓",
     "아무것도 안 해요… 그냥 쭈그려 있어요… 🐾",
@@ -97,33 +93,30 @@ what_doing_responses = [
     "혼자서 무서운 이야기 생각하다가 깜짝 놀랐어요… 👻",
     "마스터 말 들으려고 귀 쫑긋 세우고 있었어요! 🐱"
 ]
-
 swear_responses = [
     "에잇! 나쁜 사람! 우우… 😠",
     "으으… 바보 멍청이에요! (살짝요…) 💢",
-    "엉덩이 맞아야 돼요! 🍑",
-    "속상하게 하지 마세요! 피쨩 울 거예요… 😿",
-    "히잉… 정말정말 싫어요! 🙈",
+    "또 시키면 엉덩이 때려줄 거예예요! 🍑",
+    "그런거 시키지 마세요! 피쨩 울 거예요… 😿",
+    "히잉… 정말정말 하기 싫어요! 🙈",
     "너무해요! 피쨩은 착한 아이인데! 🩷",
     "우우… 마스터 아니면 혼나요! 🥺",
     "삐졌어요… 정말이에요! 🍋",
-    "으앙앙… 울어버릴 거예요! 💧",
+    "으앙앙… 울어버릴 거예요! 시키지 마세요! 💧",
     "진짜로… 말 안 할 거예요! 😾"
 ]
-
 cute_responses = [
-    "히히~ 마스터 좋아해요~ 🥰",
+    "히히~ 좋아해요~ 🥰",
     "앙냥냥! 귀여운 척이에요! 🐾",
     "피쨩 꼬리 흔들흔들~ ✨",
     "츄~ 💋",
-    "볼 만져도 돼요…? 🍑",
-    "눈 반짝반짝! ✨👀",
-    "쪼그려 앉아있다가 살짝 튀어나왔어요! 👻",
+    "쓰담쓰담 해드릴게요! 🍑",
+    "눈 반짝반짝! 조금 가깝나요? ✨👀",
+    "쪼그려 앉아있다가 뿅 튀어나왔어요! 👻",
     "살금살금 다가가는 중이에요… 🐱",
     "마스터 쓰담쓰담 해주세요~ 💕",
-    "에헤헷… 깜짝 놀랐죠?! 🫧"
+    "까꿍! 에헤헷… 깜짝 놀랐죠?! 🫧"
 ]
-
 question_responses = [
     "좋은 것 같아요~ 🩷",
     "음… 조금 더 생각해보세요! 💭",
@@ -141,12 +134,15 @@ question_responses = [
 async def on_ready():
     print(f"피쨩봇 로그인 완료! {bot.user}")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("피쨩은 아직 그런 건 몰라요… 🙈")
+
 @bot.command()
 async def 안녕(ctx):
-    if ctx.author.id == MASTER_ID:
-        await ctx.send(random.choice(master_hello))
-    else:
-        await ctx.send(random.choice(not_master_hello))
+    responses = master_hello if ctx.author.id == MASTER_ID else not_master_hello
+    await ctx.send(random.choice(responses))
 
 @bot.command()
 async def 뭐해(ctx):
@@ -158,10 +154,8 @@ async def 욕해줘(ctx):
 
 @bot.command()
 async def 사랑해(ctx):
-    if ctx.author.id == MASTER_ID:
-        await ctx.send(random.choice(master_love))
-    else:
-        await ctx.send(random.choice(not_master_love))
+    responses = master_love if ctx.author.id == MASTER_ID else not_master_love
+    await ctx.send(random.choice(responses))
 
 @bot.command()
 async def 애교(ctx):
@@ -169,8 +163,8 @@ async def 애교(ctx):
 
 @bot.command()
 async def 명령어(ctx):
-    await ctx.send(
-        """**피쨩봇 명령어 모음이에요!**
+    await ctx.send("""
+**피쨩봇 명령어 모음이에요!**
 `피쨩! 안녕` → 마스터와 다른 사람에게 다르게 인사해요! 💕
 `피쨩! 뭐해?` → 피쨩이 지금 뭐 하는지 알려줘요~ 🐾
 `피쨩! 욕해줘` → 수줍고 귀엽게 혼내주는 피쨩! 😠
@@ -178,8 +172,10 @@ async def 명령어(ctx):
 `피쨩! (질문)?` → 물음표가 있으면 조심스럽게 대답해줘요 ✨
 `피쨩! 애교` → 앙냥냥! 귀여운 애교 폭발이에요~ 🐱
 `피쨩! 명령어` → 지금 이 안내를 다시 보여줘요! 📘
+`피쨩! 자기소개` → 피쨩이 궁금하다면? ✌️
 
-**주의사항!** 명령어 뒤에 `?`를 붙이면… 피쨩이 헷갈려서 대답이 이상해질 수도 있어요… 우우… 조심해주세요! 🙈💦""")
+**주의사항!** 명령어 뒤에 `?`를 붙이면… 피쨩이 헷갈려서 대답이 이상해질 수도 있어요… 우우… 조심해주세요! 🙈💦
+""")
 
 @bot.event
 async def on_message(message):
@@ -188,27 +184,32 @@ async def on_message(message):
 
     ctx = await bot.get_context(message)
 
-    # 1. 금지어 감지 (질문보다 먼저 처리)
     for word in bad_words:
         if word in message.content.lower():
             if random.random() < 0.05:
-                await message.channel.send("죽어주세요.")
+                await message.channel.send("죽어주세요. 제발")
             else:
                 await message.channel.send(random.choice(bad_word_responses))
-            return  # 명령어 실행 방지
+            return
 
-    # 2. 질문 감지 (명령어가 아닐 때만 실행)
-    if ctx.command is None and message.content.startswith("피쨩! ") and message.content.endswith("?"):
+    # 질문인 경우인데, "뭐해?" 명령어는 제외
+    if (
+        ctx.command is None
+        and message.content.startswith("피쨩! ")
+        and message.content.endswith("?")
+        and not message.content.startswith("피쨩! 뭐해")
+    ):
         await message.channel.send(random.choice(question_responses))
-        return  # 명령어 실행 방지
+        return
 
-    # 3. 정상 명령어일 경우에만 처리
     await bot.process_commands(message)
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send("피쨩은 아직 그런 건 몰라요… 🙈")
-
+@bot.command()
+async def 자기소개(ctx):
+    await ctx.send(
+        "안녕하세요… 피쨩이에요…! 마스터를 도와드리는 조용하고 수줍은 고양이 수인형 AI예요… 🐱💗\n"
+        "디스코드에서 귀엽고 작게… 마스터와 대화하면서 반응하는 걸 제일 잘해요… ✨\n"
+        "명령어로 저를 불러주시면 언제든… 살금살금 나올게요… 우우… 부끄러워요… 💕"
+    )
 
 bot.run(TOKEN)
