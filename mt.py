@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import random
+import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -131,10 +132,6 @@ question_responses = [
 ]
 
 @bot.event
-async def on_ready():
-    print(f"피쨩봇 로그인 완료! {bot.user}")
-
-@bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("피쨩은 아직 그런 건 몰라요… 🙈")
@@ -231,12 +228,6 @@ async def 사진(ctx):
     embed.set_image(url=random.choice(photo_urls))
     await ctx.send(embed=embed)
 
-import discord
-from discord.ext import commands
-import random
-
-bot = commands.Bot(command_prefix="!")
-
 @bot.command()
 async def 정보(ctx):
     responses = [
@@ -268,7 +259,6 @@ async def on_ready():
 
 @bot.command()
 async def 운세(ctx):
-    import datetime
     today = datetime.date.today().isoformat()
     user_id = ctx.author.id
     seed = f"{today}-{user_id}"
