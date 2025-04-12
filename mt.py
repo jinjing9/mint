@@ -300,8 +300,8 @@ async def 운세(ctx):
     result = random.choice(fortunes)
     await ctx.send(f"✨ 오늘의 운세 ✨\n{result}")
 
- @bot.event
-async def on_message_delete(message):
+@bot.event
+async def on_message_delete(message):  # ← 들여쓰기 없음 / 함수는 4칸
     if message.author == bot.user:
         return
 
