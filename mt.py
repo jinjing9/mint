@@ -310,11 +310,10 @@ async def on_message_delete(message):  # ← 들여쓰기 없음 / 함수는 4�
 
     await message.channel.send(random.choice(responses))
 
-bot.run(TOKEN)
-
 # 피쨩봇 맨 아래에 추가하기!
 from flask import Flask
 import threading
+import os  # 환경변수 사용을 위해 필요해요!
 
 app = Flask('')
 
@@ -323,7 +322,11 @@ def home():
     return "피쨩 숨 쉬는 중이에요… 🐾"
 
 def run():
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get("PORT", 10000))  # Render에서 포트를 자동으로 할당해줘요!
+    app.run(host='0.0.0.0', port=port)
 
 # Flask 서버를 백그라운드로 실행
 threading.Thread(target=run).start()
+
+# 디스코드 봇 실행
+bot.run(TOKEN)
