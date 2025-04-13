@@ -277,7 +277,6 @@ async def on_message(message):
         return
 
     ctx = await bot.get_context(message)
-    await bot.process_commands(message)
 
     # 💢 욕설 필터 처리
     for word in bad_words:
@@ -290,11 +289,10 @@ async def on_message(message):
 
     # 🐾 피쨩! 대화 처리
     if (
-    ctx.command is None
-    and message.content.startswith("피쨩! ")
-    and "?" in message.content
-):
-
+        ctx.command is None
+        and message.content.startswith("피쨩! ")
+        and "?" in message.content
+    ):
         질문 = message.content.replace("피쨩! ", "").strip()
 
         피쨩_프롬프트 = (
@@ -305,11 +303,15 @@ async def on_message(message):
         )
         full_input = f"{피쨩_프롬프트}\n\n사용자 질문: {질문}\n\n피쨩의 대답:"
 
-        try:
-            response = gemini_model.generate_content(full_input)
-            await message.channel.send(response.text.strip())
-        except:
-            await message.channel.send("으으… 피쨩 머리 복잡해졌어요… 오류인가봐요… 🥺")
+    try:
+        response = gemini_model.generate_content(full_input)
+        await message.channel.send(response.text.strip())
+    except Exception as e:
+        print("Gemini API 오류:", e)
+        await message.channel.send("으으… 피쨩 머리 복잡해졌어요… 오류인가봐요… 🥺")
+
+    await bot.process_commands(message)
+
 
 @bot.command(name="안아줘")
 async def hug(ctx):
