@@ -303,15 +303,6 @@ async def on_message(message):
         )
         full_input = f"{피쨩_프롬프트}\n\n사용자 질문: {질문}\n\n피쨩의 대답:"
 
-try:
-    response = await gemini_model.generate_content(full_input)
-    await message.channel.send(response.text.strip())
-except Exception as e:
-    print("Gemini API 오류:", e)
-    await message.channel.send("으으… 피쨩 머리 복잡해졌어요… 오류인가봐요… 🥺")
-
-
-
 @bot.command(name="안아줘")
 async def hug(ctx):
     user = ctx.author
