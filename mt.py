@@ -276,6 +276,15 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    # 💢 금지어 필터링
+    for word in bad_words:
+        if word in message.content.lower():
+            if random.random() < 0.05:
+                await message.channel.send("죽어주세요. 제발")
+            else:
+                await message.channel.send(random.choice(bad_word_responses))
+            return  # 필터에 걸리면 더 이상 처리하지 않도록 종료
+
     ctx = await bot.get_context(message)
 
     if (
