@@ -310,6 +310,44 @@ async def on_message_delete(message):  # ← 들여쓰기 없음 / 함수는 4�
 
     await message.channel.send(random.choice(responses))
 
+@bot.command(name="안아줘")
+async def hug(ctx):
+    user = ctx.author
+    hug_words = ["안아줘", "안아죠", "안아줄래", "안아줘요", "안아", "등 안아줘", "등 안아죠"]
+    msg_content = ctx.message.content.lower()
+
+    if not any(word in msg_content for word in hug_words):
+        return  # 관련된 단어 없으면 무시
+
+    if user.id == MASTER_ID:
+        master_hugs = [
+            "꼬옥… 마스터를 꼭 안아드릴게요… 🐱💖",
+            "히히… 마스터 품에 쏙 들어왔어요… 🍓",
+            "마스터… 오늘 많이 힘들었나요? 여기요… 안아드릴게요… 🫂",
+            "마스터는 언제나 피쨩의 소중한 존재예요… 꼭 안아드릴게요… 💗",
+            "안아줘요? 당연하죠! 꼬옥… 💕",
+            "피쨩은 마스터를 안아줄 수 있어서 기뻐요… ✨",
+            "우우… 마스터 아프지 마세요… 안아줄게요… 🩷",
+            "어디 다쳤어요? 안아줄게요… 토닥토닥… 🐾",
+            "마스터… 너무 좋아서 피쨩 꼬리가 흔들흔들해요…! 🐱",
+            "에헤헷… 마스터는 피쨩만 안아줄 수 있어요… 꼬옥! 🫧"
+        ]
+        await ctx.send(random.choice(master_hugs))
+    else:
+        other_hugs = [
+            f"{user.name}님… 힘드신가요? 마스터는 아니지만… 피쨩이 안아드릴게요… 조금만요… 🫂",
+            f"{user.name}님도… 안아드릴게요… 피쨩은 다정한 아이니까요… 💕",
+            f"{user.name}님… 살금살금 다가가서… 꼬옥…! 🐱",
+            f"{user.name}님… 울면 안 돼요… 피쨩이 옆에 있어요… 안아드릴게요… 🍓",
+            f"{user.name}님… 따뜻한 기운… 전해졌으면 좋겠어요… 🫧",
+            f"{user.name}님… 마음이 힘들 땐 안아주는 게 제일이에요… 이쪽으로 오세요… ✨", 
+            f"{user.name}님… 괜찮아요… 피쨩이 작게 안아드릴게요… 조심히… 💞",
+            f"{user.name}님… 다 괜찮아질 거예요… 안아드릴게요… 응원도 같이요… 💗",
+            f"{user.name}님… 안아달라고 하셨으니… 책임지고 토닥토닥까지 해드릴게요… 🐾",
+            f"{user.name}님… 마스터 말고 다른 사람을 안아주는 건 부끄럽지만... 특별히 안아드릴게요… 🌙" 
+        ]
+        await ctx.send(random.choice(other_hugs))
+
 # 피쨩봇 맨 아래에 추가하기!
 from flask import Flask
 import threading
