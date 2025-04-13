@@ -295,12 +295,18 @@ async def on_message(message):
 
         try:
             response = await gemini_model.generate_content(full_input)
-            await message.channel.send(response.text.strip())
+            
+            if not hasattr(response, "text") or not response.text:
+                await message.channel.send("으으… 피쨩이 말할 수가 없어요… Gemini 응답이 비어있어요… 😿")
+            else:
+                await message.channel.send(response.text.strip())
+
         except Exception as e:
             print("Gemini API 오류:", e)
             await message.channel.send("으으… 피쨩 머리 복잡해졌어요… 오류인가봐요… 🥺")
 
     await bot.process_commands(message)
+
 
 @bot.command(name="안아줘")
 async def hug(ctx):
