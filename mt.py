@@ -6,6 +6,11 @@ import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
+import google.generativeai as genai
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
+gemini_model = genai.GenerativeModel("gemini-pro")
 TOKEN = os.getenv("DISCORD_TOKEN")
 MASTER_ID = int(os.getenv("MASTER_ID"))
 
