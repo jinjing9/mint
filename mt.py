@@ -293,9 +293,11 @@ async def on_message(message):
 
     # 🐾 피쨩! 대화 처리
     if (
-        ctx.command is None
-        and message.content.startswith("피쨩! ")
-    ):
+    ctx.command is None
+    and message.content.startswith("피쨩! ")
+    and "?" in message.content
+):
+
         질문 = message.content.replace("피쨩! ", "").strip()
 
         피쨩_프롬프트 = (
