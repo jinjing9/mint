@@ -3,9 +3,6 @@ from discord.ext import commands
 import os
 import random
 import datetime
-from dotenv import load_dotenv
-
-load_dotenv()
 import google.generativeai as genai
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -355,7 +352,6 @@ async def hug(ctx):
 # 피쨩봇 맨 아래에 추가하기!
 from flask import Flask
 import threading
-import os  # 환경변수 사용을 위해 필요해요!
 
 app = Flask('')
 
