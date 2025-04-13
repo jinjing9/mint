@@ -118,18 +118,6 @@ cute_responses = [
     "마스터 쓰담쓰담 해주세요~ 💕",
     "까꿍! 에헤헷… 깜짝 놀랐죠?! 🫧"
 ]
-question_responses = [
-    "좋은 것 같아요~ 🩷",
-    "음… 조금 더 생각해보세요! 💭",
-    "그건 나쁘지 않은 선택이에요! 👌",
-    "괜찮다고 생각해요! 🍓",
-    "글쎄요… 저는 아닌 것 같아요 🙈",
-    "더 신중하게 고민해보는 게 좋을지도 몰라요 💬",
-    "좋지는 않아요… 잘 안 어울려요! ❌",
-    "해보는 것도 나쁘지 않을 것 같아요 ✨",
-    "그건… 별로예요… 제 생각에는요 🐱",
-    "원한다면 괜찮아요! 하지만 조심히요! 💕"
-]
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -140,10 +128,6 @@ async def on_command_error(ctx, error):
 async def 안녕(ctx):
     responses = master_hello if ctx.author.id == MASTER_ID else not_master_hello
     await ctx.send(random.choice(responses))
-
-@bot.command()
-async def 뭐해(ctx):
-    await ctx.send(random.choice(what_doing_responses))
 
 @bot.command()
 async def 욕해줘(ctx):
@@ -163,8 +147,7 @@ async def 명령어(ctx):
     embed = discord.Embed(
         title="📘 피쨩봇 명령어 모음이에요!",
         description="""
-`피쨩! 안녕` → 마스터와 다른 사람에게 다르게 인사해요! 💕  
-`피쨩! 뭐해` → 피쨩이 지금 뭐 하는지 알려줘요~ 🐾  
+`피쨩! 안녕` → 마스터와 다른 사람에게 다르게 인사해요! 💕   
 `피쨩! 욕해줘` → 수줍고 귀엽게 혼내주는 피쨩! 😠  
 `피쨩! 사랑해` → 마스터일 때만 따로 반응해요! 💓  
 `피쨩! (질문)?` → 물음표가 있으면 조심스럽게 대답해줘요 ✨  
@@ -178,36 +161,10 @@ async def 명령어(ctx):
         color=discord.Color.pink()
     )
 
-    embed.set_footer(text="💡 명령어 끝에 물음표 붙이면 피쨩이 헷갈릴 수 있어요! 조심해주세요 🙈💦")
+    embed.set_footer(text="피쨩에게 질문을 해보세요! 💡")
 
     await ctx.send(embed=embed)
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-
-    ctx = await bot.get_context(message)
-
-    for word in bad_words:
-        if word in message.content.lower():
-            if random.random() < 0.05:
-                await message.channel.send("죽어주세요. 제발")
-            else:
-                await message.channel.send(random.choice(bad_word_responses))
-            return
-
-    # 질문인 경우인데, "뭐해" 명령어는 제외
-    if (
-        ctx.command is None
-        and message.content.startswith("피쨩! ")
-        and message.content.endswith("?")
-        and not message.content.startswith("피쨩! 뭐해")
-    ):
-        await message.channel.send(random.choice(question_responses))
-        return
-
-    await bot.process_commands(message)
 
 @bot.command()
 async def 자기소개(ctx):
@@ -311,6 +268,44 @@ async def on_message_delete(message):  # ← 들여쓰기 없음 / 함수는 4�
     ]
 
     await message.channel.send(random.choice(responses))
+
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+
+    ctx = await bot.get_context(message)
+    await bot.process_commands(message)
+
+    # 💢 욕설 필터 처리
+    for word in bad_words:
+        if word in message.content.lower():
+            if random.random() < 0.05:
+                await message.channel.send("죽어주세요. 제발")
+            else:
+                await message.channel.send(random.choice(bad_word_responses))
+            return
+
+    # 🐾 피쨩! 대화 처리
+    if (
+        ctx.command is None
+        and message.content.startswith("피쨩! ")
+    ):
+        질문 = message.content.replace("피쨩! ", "").strip()
+
+        피쨩_프롬프트 = (
+            "너는 '피쨩'이라는 캐릭터야. 피쨩은 소심하고 부끄러움을 많이 타는 고양이 수인이며, "
+            "마스터가 부르면 조심스럽게 대답해요. 말투는 '~입니다요!', '~해요!' 같이 예의 바르고 귀엽게 해요. "
+            "이모티콘을 자주 써요. 너무 아기 같지는 않게, 조용조용하게 말해요. "
+            "질문에 진심으로 대답해요. 마침표는 최소화하고, 말줄임표는 2번 이하로 써요."
+        )
+        full_input = f"{피쨩_프롬프트}\n\n사용자 질문: {질문}\n\n피쨩의 대답:"
+
+        try:
+            response = gemini_model.generate_content(full_input)
+            await message.channel.send(response.text.strip())
+        except:
+            await message.channel.send("으으… 피쨩 머리 복잡해졌어요… 오류인가봐요… 🥺")
 
 @bot.command(name="안아줘")
 async def hug(ctx):
